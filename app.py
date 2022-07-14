@@ -14,11 +14,13 @@ filename = os.path.join(dir, 'options.ini')
 config = configparser.ConfigParser()
 config.read(filename)
 
+# load website when accessed
 @app.route("/")
 def home():
     mode = int(config['MAIN']['mode'])
-    return render_template('index.html', mode = mode, next_bus = "N/A")
+    return render_template('index.html', mode = mode, bus_text = "N/A")
 
+# handle mode
 @app.route("/mode", methods=["POST"])
 def toggle_mode():
     print(request.form["mode"])
@@ -26,8 +28,12 @@ def toggle_mode():
 
     response = requests.get("http://ctabustracker.com/bustime/api/v2/getpredictions?key=Yr9nbHrDBVbxtdC4j8BTw5R3z&rt=152&stpid=12472&format=json")
     bus_json = response.json()
-    next_bus = bus_json['bustime-response']['prd'][0]['prdctdn']
+    bus_text = "Next busses: "
+    for bus in bus_json['bustime-response']['prd']:
+        if bus_text != "Next busses: ":
+            bus_text = bus_text + ", "
+        bus_text = bus_text + bus['prdctdn'] + " mins"
 
-    return render_template('index.html', mode = mode, next_bus = next_bus)
+    return render_template('index.html', mode = mode, bus_text = bus_text)
 
 app.run(host='0.0.0.0', port=80)
