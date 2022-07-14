@@ -17,4 +17,4 @@ config.read(filename)
 def home():
     return render_template('index.html')
 
-app.run(host='0.0.0.0', port=80)
+app.run(host='0.0.0.0', port=20)
