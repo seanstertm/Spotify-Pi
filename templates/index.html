@@ -14,10 +14,24 @@
         html{
             background-color: black;
         }
+        h1{
+            color: white;
+        }
     </style>
 
 </head>
 <body>
-
+    <form action="/mode", method="POST">
+        <h1>Mode</h1>
+        {% if mode == 0%}
+        <input {% if mode==1 %} disabled="disabled"{% endif %} type="submit" name="mode" value="1"></input>
+        {% endif %}
+        {% if mode == 1%}
+        <input {% if mode==0 %} disabled="disabled"{% endif %} type="submit" name="mode" value="0"></input>
+        {% endif %}
+    </form>
+    {% if mode == 0%}
+    <h1>Next bus: {{ next_bus }} mins</h1>
+    {% endif %}
 </body>
 </html>
