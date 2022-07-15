@@ -29,6 +29,8 @@ def toggle_mode():
     response = requests.get("http://ctabustracker.com/bustime/api/v2/getpredictions?key=Yr9nbHrDBVbxtdC4j8BTw5R3z&rt=152&stpid=12472&format=json")
     bus_json = response.json()
     bus_text = "Next busses: "
+    if "error" in bus_json['bustime-response']:
+        return render_template('index.html', mode = mode, bus_text = "No busses in the next 30 minutes")
     for bus in bus_json['bustime-response']['prd']:
         if bus_text != "Next busses: ":
             bus_text = bus_text + ", "
