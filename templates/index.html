@@ -4,18 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Remote Control</title>
     <link href="/static/style.css" rel="stylesheet">
 
 </head>
 <body>
     <form method="POST">
         {% if mode == "spotify"%}
-        <input type="image" src="/static/cta.png" formaction="/cta" width="100px"></input>
+
+        <div>
+            <input type="image" src="/static/cta.png" formaction="/cta" width="20%" style="margin: 5%;">
+            <img src="/static/spotify.png" width="20%" style="margin: 5%;">
+        </div>
+        <div>
+            <img src="/static/blackBar.png" width="10%" style="margin: 0% 10%;">
+            <img src="/static/whiteBar.png" width="10%" style="margin: 0% 10%;">
+        </div>
+        
+        
         {% endif %}
-        {% if mode == "cta"%}
+        <!-- {% if mode == "cta"%}
+        
+        
         <input type="image" src="/static/spotify.png" formaction="/spotify" width="100px"></input>
-        {% endif %}
+        
+        
+        {% endif %} -->
+    </form>
+    <form method="POST" style="margin: 5%;">
+        <div>
+            <input type="image" src="/static/power.png" formaction="/poweroff" width="20%">
+        </div>
     </form>
 </body>
 </html>
