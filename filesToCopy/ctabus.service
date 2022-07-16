@@ -8,7 +8,7 @@ SyslogIdentifier=ctabus
 LimitRTPRIO=99
 Restart=always
 RestartSec=3
-ExecStart=python /home/pi/Spotify-Pi/ctabus.python
+ExecStart=python /home/pi/Spotify-Pi/ctabus.py
 
 [Install]
 WantedBy=multi-user.target

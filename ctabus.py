@@ -18,7 +18,7 @@ try:
             else: 
                 nowTime = bus_json['bustime-response']['prd'][0]['prdctdn']
             if prevTime != nowTime:
-                break
+                print(nowTime)
             prevTime = nowTime
             time.sleep(5)
         except Exception as e:
