@@ -18,11 +18,10 @@ try:
             else: 
                 nowTime = bus_json['bustime-response']['prd'][0]['prdctdn']
             if prevTime != nowTime:
-                print(nowTime)
+                break
             prevTime = nowTime
             time.sleep(5)
         except Exception as e:
-            print(e)
             time.sleep(1)
 except KeyboardInterrupt:
     print("stopping...")
