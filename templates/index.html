@@ -9,32 +9,55 @@
 
 </head>
 <body>
+    {% if power == 'on' %}
     <form method="POST">
         {% if mode == "spotify"%}
 
         <div>
-            <input type="image" src="/static/cta.png" formaction="/cta" width="20%" style="margin: 5%;">
-            <img src="/static/spotify.png" width="20%" style="margin: 5%;">
+            <input type="image" src="/static/cta.png" formaction="/cta" width="40%" style="margin: 5%;">
+            <img src="/static/spotify.png" width="40%" style="margin: 5%;">
         </div>
         <div>
-            <img src="/static/blackBar.png" width="10%" style="margin: 0% 10%;">
-            <img src="/static/whiteBar.png" width="10%" style="margin: 0% 10%;">
+            <img src="/static/blackBar.png" width="30%" style="margin: 0% 10%;">
+            <img src="/static/whiteBar.png" width="30%" style="margin: 0% 10%;">
         </div>
         
         
         {% endif %}
-        <!-- {% if mode == "cta"%}
+        {% if mode == "cta"%}
         
         
-        <input type="image" src="/static/spotify.png" formaction="/spotify" width="100px"></input>
-        
-        
-        {% endif %} -->
-    </form>
-    <form method="POST" style="margin: 5%;">
         <div>
-            <input type="image" src="/static/power.png" formaction="/poweroff" width="20%">
+            <img src="/static/cta.png" width="40%" style="margin: 5%;">
+            <input type="image" src="/static/spotify.png" formaction="/spotify" width="40%" style="margin: 5%;">
+        </div>
+        <div>
+            <img src="/static/whiteBar.png" width="30%" style="margin: 0% 10%;">
+            <img src="/static/blackBar.png" width="30%" style="margin: 0% 10%;">
+        </div>
+        
+        
+        {% endif %}
+    </form>
+    <form method="POST" style="margin-top: 25%; margin-bottom: 25%;" action="/brightness">
+        <div>
+            <img src="/static/brightness.png" width="7%" style="margin: 1%;">
+            <input type="range" min="10" name="brightness" value="{{ brightness }}">
+            <input type="image" src="/static/refresh.png" width="5%" style="margin: 2%;" name="submit">
         </div>
     </form>
+    <form method="POST" style="margin: 0%;">
+        <div>
+            <input type="image" src="/static/power.png" formaction="/poweroff" width="90%">
+        </div>
+    </form>
+    {% endif %}
+    {% if power == 'off' %}
+    <form method="POST" style="margin: 0%;">
+        <div>
+            <input type="image" src="/static/power.png" formaction="/poweron" width="90%">
+        </div>
+    </form>
+    {% endif %}
 </body>
 </html>
