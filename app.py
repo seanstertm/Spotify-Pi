@@ -16,6 +16,9 @@ filename = os.path.join(dir, 'options.ini')
 config = configparser.ConfigParser()
 config.read(filename)
 
+def write():
+    with open(filename, 'w') as configfile:
+        config.write(configfile)
 
 sysbus = dbus.SystemBus()
 systemd1 = sysbus.get_object('org.freedesktop.systemd1', '/org/freedesktop/systemd1')
@@ -27,8 +30,7 @@ def home():
     power = config['MAIN']['power']
     brightness = config['MAIN']['brightness']
 
-    if mode == 'cta':
-        manager.StartUnit('ctabus.service', 'replace')
+    manager.StartUnit('ctabus.service', 'replace')
 
     return render_template('index.html', mode = mode, power = power, brightness = brightness)
 
@@ -37,7 +39,9 @@ def toggle_mode():
     config.set("MAIN", "mode", "cta")
     brightness = config['MAIN']['brightness']
 
-    manager.StartUnit('ctabus.service', 'replace')
+    manager.RestartUnit('ctabus.service', 'fail')
+
+    write()
 
     return render_template('index.html', mode = 'cta', power = 'on', brightness = brightness)
 
@@ -46,7 +50,9 @@ def spotify():
     config.set("MAIN", "mode", "spotify")
     brightness = config['MAIN']['brightness']
 
-    manager.StopUnit('ctabus.service', 'replace')
+    manager.RestartUnit('ctabus.service', 'fail')
+
+    write()
 
     return render_template('index.html', mode = 'spotify', power = 'on', brightness = brightness)
 
@@ -57,18 +63,19 @@ def brightness():
 
     mode = config['MAIN']['mode']
 
-    if mode == 'cta':
-        manager.RestartUnit('ctabus.service', 'fail')
+    manager.RestartUnit('ctabus.service', 'fail')
+
+    write()
 
     return render_template('index.html', mode = mode, power = 'on', brightness = brightness)
 
 @app.route("/poweroff", methods=['POST'])
 def poweroff():
     config.set("MAIN", "power", "off")
-    mode = config['MAIN']['mode']
 
-    if mode == 'cta':
-        manager.StopUnit('ctabus.service', 'replace')
+    manager.StopUnit('ctabus.service', 'replace')
+
+    write()
 
     return render_template('index.html', power = 'off')
 
@@ -78,8 +85,9 @@ def poweron():
     mode = config['MAIN']['mode']
     brightness = config['MAIN']['brightness']
 
-    if mode == 'cta':
-        manager.StartUnit('ctabus.service', 'replace')
+    manager.StartUnit('ctabus.service', 'replace')
+
+    write()
 
     return render_template('index.html', power = 'on', mode = mode, brightness = brightness)
 
