@@ -5,33 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    
-    <style>
-        *{
-            margin: 0;
-            border: 0;
-        }
-        html{
-            background-color: black;
-        }
-        h1{
-            color: white;
-        }
-    </style>
+    <link href="/static/style.css" rel="stylesheet">
 
 </head>
 <body>
-    <form action="/mode", method="POST">
-        <h1>Mode</h1>
-        {% if mode == 0%}
-        <input {% if mode==1 %} disabled="disabled"{% endif %} type="submit" name="mode" value="1"></input>
+    <form method="POST">
+        {% if mode == "spotify"%}
+        <input type="image" src="/static/cta.png" formaction="/cta" width="100px"></input>
         {% endif %}
-        {% if mode == 1%}
-        <input {% if mode==0 %} disabled="disabled"{% endif %} type="submit" name="mode" value="0"></input>
+        {% if mode == "cta"%}
+        <input type="image" src="/static/spotify.png" formaction="/spotify" width="100px"></input>
         {% endif %}
     </form>
-    {% if mode == 0%}
-    <h1>{{ bus_text }}</h1>
-    {% endif %}
 </body>
 </html>
