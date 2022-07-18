@@ -34,7 +34,7 @@ def home():
 
     return render_template('index.html', mode = mode, power = power, brightness = brightness)
 
-@app.route("/cta", methods=["POST"])
+@app.route("/cta", methods=["POST", "GET"])
 def toggle_mode():
     config.set("MAIN", "mode", "cta")
     brightness = config['MAIN']['brightness']
@@ -45,7 +45,7 @@ def toggle_mode():
 
     return render_template('index.html', mode = 'cta', power = 'on', brightness = brightness)
 
-@app.route("/spotify", methods=["POST"])
+@app.route("/spotify", methods=["POST", "GET"])
 def spotify():
     config.set("MAIN", "mode", "spotify")
     brightness = config['MAIN']['brightness']
@@ -56,7 +56,7 @@ def spotify():
 
     return render_template('index.html', mode = 'spotify', power = 'on', brightness = brightness)
 
-@app.route("/brightness", methods=["POST"])
+@app.route("/brightness", methods=["POST", "GET"])
 def brightness():
     brightness = request.form['brightness']
     config.set("MAIN", "brightness", brightness)
@@ -69,7 +69,7 @@ def brightness():
 
     return render_template('index.html', mode = mode, power = 'on', brightness = brightness)
 
-@app.route("/poweroff", methods=['POST'])
+@app.route("/poweroff", methods=['POST', "GET"])
 def poweroff():
     config.set("MAIN", "power", "off")
 
@@ -79,7 +79,7 @@ def poweroff():
 
     return render_template('index.html', power = 'off')
 
-@app.route('/poweron', methods=['POST'])
+@app.route('/poweron', methods=['POST', "GET"])
 def poweron():
     config.set("MAIN", "power", "on")
     mode = config['MAIN']['mode']
