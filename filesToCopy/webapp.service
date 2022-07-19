@@ -1,0 +1,14 @@
+[Unit]
+Description=web app service
+
+[Service]
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=webapp
+LimitRTPRIO=99
+Restart=always
+RestartSec=3
+ExecStart=python /home/pi/Spotify-Pi/app.py
+
+[Install]
+WantedBy=multi-user.target
