@@ -66,7 +66,12 @@ try:
                 if prevSong != nowSong:
                     print(nowSong)
                     prevSong = nowSong
+                time.sleep(1)
             except Exception as e:
+                nowSong = "No song playing"
+                if prevSong != nowSong:
+                    print(nowSong)
+                    prevSong = nowSong
                 time.sleep(1)
 except KeyboardInterrupt:
     print("stopping...")
