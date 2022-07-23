@@ -33,12 +33,16 @@ filename = os.path.join(dir, 'options.ini')
 config = configparser.ConfigParser()
 config.read(filename)
 
-if config['MAIN']['mode'] == 'cta':
-    GPIO.output(23, GPIO.HIGH)
+if config["MAIN"]['power'] == 'on':
+    if config['MAIN']['mode'] == 'cta':
+        GPIO.output(23, GPIO.HIGH)
+        GPIO.output(24, GPIO.LOW)
+    if config['MAIN']['mode'] == 'spotify':
+        GPIO.output(24, GPIO.HIGH)
+        GPIO.output(23, GPIO.LOW)
+if config["MAIN"]['power'] == 'off':
     GPIO.output(24, GPIO.LOW)
-if config['MAIN']['mode'] == 'spotify':
-    GPIO.output(24, GPIO.HIGH)
-    GPIO.output(23, GPIO.LOW)
+    GPIO.output(23, GPIO.HIGH)
 
 def getSongInfo():
   scope = 'user-read-currently-playing'
