@@ -30,7 +30,7 @@ filename = os.path.join(dir, 'options.ini')
 config = configparser.ConfigParser()
 config.read(filename)
 
-errorImage = os.path.join(dir, "warning.jpg")
+errorImage = os.path.join(dir, "warning.png")
 
 options = RGBMatrixOptions()
 options.rows = 32
