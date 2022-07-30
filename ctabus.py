@@ -5,6 +5,9 @@ import spotipy
 import spotipy.util as util
 import configparser
 import os
+from PIL import Image
+from io import BytesIO
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 route = 152
 stop = 12472
@@ -26,6 +29,20 @@ dir = os.path.dirname(__file__)
 filename = os.path.join(dir, 'options.ini')
 config = configparser.ConfigParser()
 config.read(filename)
+
+errorImage = os.path.join(dir, "warning.jpg")
+
+options = RGBMatrixOptions()
+options.rows = 32
+options.cols = 32
+options.chain_length = 1
+options.parallel = 1
+options.hardware_mapping = "regular"
+options.gpio_slowdown = 0
+options.brightness = int(config['MAIN']["brightness"])
+options.limit_refresh_rate_hz = 60
+
+matrix = RGBMatrix(options = options)
 
 def getSongInfo():
   scope = 'user-read-currently-playing'
@@ -54,23 +71,33 @@ try:
                 else: 
                     nowTime = bus_json['bustime-response']['prd'][0]['prdctdn']
                 if prevTime != nowTime:
-                    print(nowTime)
-                prevTime = nowTime
+                    image = Image.open(errorImage)
+                    image.thumbnail((32, 32), Image.ANTIALIAS)
+                    matrix.SetImage(image.convert('RGB'))
+                    prevTime = nowTime
                 time.sleep(5)
             except Exception as e:
+                image = Image.open(errorImage)
+                image.thumbnail((32, 32), Image.ANTIALIAS)
+                matrix.SetImage(image.convert('RGB'))
                 time.sleep(1)
         elif config['MAIN']['mode'] == 'spotify':
             try:
                 imageUrl = getSongInfo()[1]
                 nowSong = imageUrl
                 if prevSong != nowSong:
-                    print(nowSong)
+                    result = requests.get(nowSong)
+                    image = Image.open(BytesIO(result.content))
+                    image.thumbnail((32, 32), Image.ANTIALIAS)
+                    matrix.SetImage(image.convert('RGB'))
                     prevSong = nowSong
                 time.sleep(1)
             except Exception as e:
                 nowSong = "No song playing"
                 if prevSong != nowSong:
-                    print(nowSong)
+                    image = Image.open(errorImage)
+                    image.thumbnail((32, 32), Image.ANTIALIAS)
+                    matrix.SetImage(image.convert('RGB'))
                     prevSong = nowSong
                 time.sleep(1)
 except KeyboardInterrupt:
