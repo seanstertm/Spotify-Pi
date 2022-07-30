@@ -61,7 +61,7 @@ try:
                 time.sleep(1)
         elif config['MAIN']['mode'] == 'spotify':
             try:
-                imageUrl = getSongInfo()[0]
+                imageUrl = getSongInfo()[1]
                 nowSong = imageUrl
                 if prevSong != nowSong:
                     print(nowSong)
