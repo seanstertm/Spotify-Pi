@@ -1,4 +1,3 @@
-from cgi import test
 from PIL import Image
 import os
 
