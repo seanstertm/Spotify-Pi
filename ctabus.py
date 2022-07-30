@@ -6,12 +6,6 @@ import spotipy.util as util
 import configparser
 import os
 
-import RPi.GPIO as GPIO
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
-
 route = 152
 stop = 12472
 
@@ -32,14 +26,6 @@ dir = os.path.dirname(__file__)
 filename = os.path.join(dir, 'options.ini')
 config = configparser.ConfigParser()
 config.read(filename)
-
-
-if config['MAIN']['mode'] == 'cta':
-    GPIO.output(23, GPIO.HIGH)
-    GPIO.output(24, GPIO.LOW)
-if config['MAIN']['mode'] == 'spotify':
-    GPIO.output(24, GPIO.HIGH)
-    GPIO.output(23, GPIO.LOW)
 
 def getSongInfo():
   scope = 'user-read-currently-playing'
@@ -90,5 +76,4 @@ try:
 except KeyboardInterrupt:
     print("stopping...")
     sys.exit(0)
-    GPIO.cleanup()
 
