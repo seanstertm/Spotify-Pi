@@ -86,6 +86,7 @@ try:
                 imageUrl = getSongInfo()[1]
                 nowSong = imageUrl
                 if prevSong != nowSong:
+                    print(nowSong)
                     result = requests.get(nowSong)
                     image = Image.open(BytesIO(result.content))
                     image.thumbnail((32, 32), Image.ANTIALIAS)
