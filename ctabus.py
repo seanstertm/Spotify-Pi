@@ -66,11 +66,14 @@ try:
                 response = requests.get(f"http://ctabustracker.com/bustime/api/v2/getpredictions?key=Yr9nbHrDBVbxtdC4j8BTw5R3z&rt={route}&stpid={stop}&format=json")
                 bus_json = response.json()
                 if "error" in bus_json['bustime-response']:
-                    nowTime = "No busses in the next 30 minutes"
+                    nowTime = "NONE"
                 else: 
                     nowTime = bus_json['bustime-response']['prd'][0]['prdctdn']
                 if prevTime != nowTime:
-                    image = Image.open(errorImage)
+                    try:
+                        image = Image.open(os.path.join(dir, f"busTimes/{nowTime}.png"))
+                    except:
+                        image = Image.open(errorImage)
                     image.thumbnail((32, 32), Image.ANTIALIAS)
                     matrix.SetImage(image.convert('RGB'))
                     prevTime = nowTime
