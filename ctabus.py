@@ -15,8 +15,8 @@ GPIO.setup(24, GPIO.OUT)
 route = 152
 stop = 12472
 
-client_id="8e5305d6cf78494fb913b3dafbfc01d9"
-client_secret="d662bf3ba5534526966970ee327fca7b"
+client_id="3631fe86bb204356b6f83ee2fb0a9299"
+client_secret="82e80b6fca4643d29621346203e77885"
 redirect_uri="http://127.0.0.1:8080/callback"
 # redirect_uri="http://127.0.0.1/callback?code=AQACDh03u5rqq2tgR0UL4kSZt08rWwIrvXYbYZxNQYNNXNHSqPvmwzMrExb_PsPFXUXaTePoeYRXOL_OVlTaRTpXOBihkoaXd6WDj5hAeKQLCq9oVfLtCgTB8t0o_fDss647b2zYh-Q1wg6xgC97hhvaIuUwdnF_iZI6YGk9chky-svzwK8MpuctnzyV1GdlSonpsIBSQDc1dw"
 username="seanstertm"
