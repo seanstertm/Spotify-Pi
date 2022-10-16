@@ -15,7 +15,7 @@ stop = 12472
 client_id="3631fe86bb204356b6f83ee2fb0a9299"
 client_secret="82e80b6fca4643d29621346203e77885"
 redirect_uri="http://127.0.0.1:8080/callback"
-username="seanstertm"
+username="sofaking2004"
 token_path="/home/pi/Spotify-Pi/.cache"
 
 prevTime = ""
