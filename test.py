@@ -3,11 +3,11 @@ import spotipy.util as util
 import sys
 import time
 
-client_id="3631fe86bb204356b6f83ee2fb0a9299"
-client_secret="82e80b6fca4643d29621346203e77885"
-redirect_uri="http://127.0.0.1:8080/callback"
-username="sofaking2004"
-token_path=".cache"
+client_id=""
+client_secret=""
+redirect_uri=""
+username=""
+token_path=""
 
 def getSongInfo():
   scope = 'user-read-currently-playing'
